@@ -1,0 +1,44 @@
+title: Nltest.exe enumeration attempt 
+description: Nltest is a Windows command-line utility used to list domain controllers and enumerate domain trust.
+author: Ronald Mercado
+status: experimental 
+id: 
+Created: '2018-05-25' 
+modification_date: '2021-08-11'
+logsource: 
+  category: process_creation
+  product: windows
+detection: 
+  selection:
+    Image|contains:
+      - nltest
+    CommandLine|contains:
+      - /server
+      - /query
+      - /domain_trusts
+      - /all_trusts
+      - /dclist 
+      - /dsgetdc
+      - /dnsgetdc
+      - /parent_domain
+      - /sc_query
+      - /finduser
+      - /user
+      - /whowill
+  condition: selection  
+tags: 
+  - attack.discovery
+  - attack.t1016
+  - attack.t1018
+  - attack.t1482
+Resources:
+  - https://twitter.com/sysopfb/status/986799053668139009
+  - https://ss64.com/nt/nltest.html
+  - https://attack.mitre.org/software/S0359/ 
+  - https://attack.mitre.org/techniques/T1482/
+  - https://attack.mitre.org/techniques/T1018/
+  - https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc731935(v=ws.11)
+  - https://www.fortinet.com/blog/threat-research/trickbot-s-new-reconnaissance-plugin
+  - https://thedfirreport.com/2020/10/08/ryuks-return/
+Notes: 
+  - Thanks to Sysopfb - @sysopfb
